@@ -1,4 +1,4 @@
-package REDworkout;
+package com.TempPackage;
 
 public class Analytics {
 
