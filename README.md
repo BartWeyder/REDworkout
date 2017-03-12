@@ -13,7 +13,7 @@ The theme of our project is workout app. Our aim is to create the application th
 ## Authors:
 1. Eugenij Kizim
 2. Anastasiia Bobyr
-3. Nikita Tyshkevich
+3. Nikita Tyshkevych
 
 <br>
 ## UML-diagram:
