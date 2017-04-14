@@ -1,5 +1,5 @@
 # Web project
-<br>
+
 ## Workout app
 
 
@@ -9,13 +9,13 @@ The theme of our project is workout app. Our aim is to create the application th
 <br>This application will be useful both for the beginners and professional athletes.
 
 
-<br>
+
 ## Authors:
 1. Eugenij Kizim
 2. Anastasiia Bobyr
 3. Nikita Tyshkevych
 
-<br>
+
 ## UML-diagram:
 <br>
 <img height=900 src="https://github.com/BobyrAnastasiya/REDworkout/blob/master/uml.png">
