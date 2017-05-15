@@ -1,5 +1,7 @@
 package com.TempPackage;
 
+import java.util.Date;
+
 public class Statistics {
 
     private double weight_sum;
