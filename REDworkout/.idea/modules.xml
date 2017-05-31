@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/REDworkout.iml" filepath="$PROJECT_DIR$/REDworkout.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RedWorkout.iml" filepath="$PROJECT_DIR$/RedWorkout.iml" />
     </modules>
   </component>
 </project>
