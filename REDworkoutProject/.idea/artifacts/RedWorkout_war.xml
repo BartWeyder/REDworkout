@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="RedWorkout:war">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="spring-mvc-project-1.0-SNAPSHOT.war">
-      <element id="artifact" artifact-name="RedWorkout:war exploded" />
-    </root>
-  </artifact>
-</component>

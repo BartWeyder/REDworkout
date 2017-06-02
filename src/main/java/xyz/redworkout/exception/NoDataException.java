@@ -1,7 +1,7 @@
 package xyz.redworkout.exception;
 
 /**
- * Created by bartw on 15-May-17.
+ * Created by Eugenij Kizim on 15-May-17.
  */
 public class NoDataException extends Exception {
     public  NoDataException(String msg)

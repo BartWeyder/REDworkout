@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="RedWorkout" />
+        <module name="REDworkout" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="RedWorkout" target="1.8" />
+      <module name="REDworkout" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
