@@ -1,8 +1,5 @@
 package xyz.redworkout.model;
 
-/**
- * Created by Eugenij Kizim on 04-Jun-17.
- */
 import java.io.Serializable;
 import java.util.Date;
 
@@ -17,49 +14,49 @@ import javax.persistence.TemporalType;
 @Table(name="PERSISTENT_LOGINS")
 public class PersistentLogin implements Serializable{
 
-    @Id
-    private String series;
+	@Id
+	private String series;
 
-    @Column(name="email", unique=true, nullable=false)
-    private String username;
+	@Column(name="USERNAME", unique=true, nullable=false)
+	private String username;
+	
+	@Column(name="TOKEN", unique=true, nullable=false)
+	private String token;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date last_used;
 
-    @Column(name="TOKEN", unique=true, nullable=false)
-    private String token;
+	public String getSeries() {
+		return series;
+	}
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date last_used;
+	public void setSeries(String series) {
+		this.series = series;
+	}
 
-    public String getSeries() {
-        return series;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setSeries(String series) {
-        this.series = series;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getUsername() {
-        return username;
-    }
+	public String getToken() {
+		return token;
+	}
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+	public void setToken(String token) {
+		this.token = token;
+	}
 
-    public String getToken() {
-        return token;
-    }
+	public Date getLast_used() {
+		return last_used;
+	}
 
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public Date getLast_used() {
-        return last_used;
-    }
-
-    public void setLast_used(Date last_used) {
-        this.last_used = last_used;
-    }
-
-
+	public void setLast_used(Date last_used) {
+		this.last_used = last_used;
+	}
+	
+	
 }

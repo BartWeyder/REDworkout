@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="TemporaryDB" uuid="e661bc73-c0ba-4d50-b95d-e29158d0507d">
+    <data-source source="LOCAL" name="@127.0.0.1" uuid="e4097d6e-2631-4d19-9e94-9836129730a8">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>

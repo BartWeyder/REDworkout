@@ -1,8 +1,5 @@
 package xyz.redworkout.security;
 
-/**
- * Created by Eugenij Kizim on 04-Jun-17.
- */
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,42 +15,41 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import xyz.redworkout.model.User;
-import xyz.redworkout.model.UserRole;
+import xyz.redworkout.model.UserProfile;
 import xyz.redworkout.service.UserService;
 
 
 @Service("customUserDetailsService")
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService{
 
-    static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
+	static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
+	
+	@Autowired
+	private UserService userService;
+	
+	@Transactional(readOnly=true)
+	public UserDetails loadUserByUsername(String email)
+			throws UsernameNotFoundException {
+		User user = userService.findByEmail(email);
+		logger.info("User : {}", user);
+		if(user==null){
+			logger.info("User not found");
+			throw new UsernameNotFoundException("Email not found");
+		}
+			return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
+				 true, true, true, true, getGrantedAuthorities(user));
+	}
 
-    @Autowired
-    private UserService userService;
-
-    @Transactional(readOnly=true)
-    public UserDetails loadUserByUsername(String SSOid)
-            throws UsernameNotFoundException {
-        User user = userService.findByEmail(SSOid);
-        logger.info("User : {}", user);
-        if(user==null){
-            logger.info("User not found");
-            throw new UsernameNotFoundException("User not found");
-        }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),
-                true, true, true, true, getGrantedAuthorities(user));
-    }
-
-
-    private List<GrantedAuthority> getGrantedAuthorities(User user){
-        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-
-        for(UserRole userRole : user.getUserRoles()){
-            logger.info("UserRole : {}", userRole);
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+userRole.getType()));
-        }
-        logger.info("authorities : {}", authorities);
-        return authorities;
-    }
-
+	
+	private List<GrantedAuthority> getGrantedAuthorities(User user){
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		
+		for(UserProfile userProfile : user.getUserProfiles()){
+			logger.info("UserProfile : {}", userProfile);
+			authorities.add(new SimpleGrantedAuthority("ROLE_"+userProfile.getType()));
+		}
+		logger.info("authorities : {}", authorities);
+		return authorities;
+	}
+	
 }
-

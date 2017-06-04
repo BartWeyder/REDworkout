@@ -1,8 +1,5 @@
 package xyz.redworkout.controller;
 
-/**
- * Created by Eugenij Kizim on 04-Jun-17.
- */
 import java.util.List;
 import java.util.Locale;
 
@@ -28,10 +25,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import xyz.redworkout.model.User;
-import xyz.redworkout.model.UserRole;
-import xyz.redworkout.service.UserRoleService;
+import xyz.redworkout.model.UserProfile;
+import xyz.redworkout.service.UserProfileService;
 import xyz.redworkout.service.UserService;
-
 
 
 @Controller
@@ -39,98 +35,202 @@ import xyz.redworkout.service.UserService;
 @SessionAttributes("roles")
 public class AppController {
 
-    @Autowired
-    UserService userService;
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	UserProfileService userProfileService;
+	
+	@Autowired
+	MessageSource messageSource;
 
-    @Autowired
-    UserRoleService userRoleService;
+	@Autowired
+	PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
+	
+	@Autowired
+	AuthenticationTrustResolver authenticationTrustResolver;
+	
 
-    @Autowired
-    MessageSource messageSource;
+	/**
+	 * This method will list all existing users.
+	 */
+	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+	public String listUsers(ModelMap model) {
 
-    @Autowired
-    PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
+		List<User> users = userService.findAllUsers();
+		model.addAttribute("users", users);
+		if (isCurrentAuthenticationAnonymous())
+			model.addAttribute("loggedinuser", getPrincipal());
+		else
+			model.addAttribute("loggedinuser", getPrincipalName());
+		return "userslist";
+	}
 
-    @Autowired
-    AuthenticationTrustResolver authenticationTrustResolver;
+	/**
+	 * This method will provide the medium to add a new user.
+	 */
+	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
+	public String newUser(ModelMap model) {
+		User user = new User();
+		model.addAttribute("user", user);
+		model.addAttribute("edit", false);
+		model.addAttribute("loggedinuser", getPrincipalName());
+		return "registration";
+	}
 
+	/**
+	 * This method will be called on form submission, handling POST request for
+	 * saving user in database. It also validates the user input
+	 */
+	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
+	public String saveUser(@Valid User user, BindingResult result,
+			ModelMap model) {
 
-    /**
-     * This method will list all existing users.
-     */
-    @RequestMapping(value = { "/", "/main" }, method = RequestMethod.GET)
-    public String about(ModelMap model) {
+		if (result.hasErrors()) {
+			return "registration";
+		}
 
-        //List<User> users = userService.findAllUsers();
-        //model.addAttribute("users", users);
-        //model.addAttribute("loggedinuser", getPrincipal());
-        return "/about";
-    }
+		/*
+		 * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation 
+		 * and applying it on field [sso] of Model class [User].
+		 * 
+		 * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
+		 * framework as well while still using internationalized messages.
+		 * 
+		 */
 
-    @ModelAttribute("roles")
-    public List<UserRole> initializeProfiles() {
-        return userRoleService.findAll();
-    }
+		/*if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
+			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
+		    result.addError(ssoError);
+			return "registration";
+		}*/
 
-    /**
-     * This method handles Access-Denied redirect.
-     */
-    @RequestMapping(value = "/access-denied", method = RequestMethod.GET)
-    public String accessDeniedPage(ModelMap model) {
-        model.addAttribute("loggedinuser", getPrincipal());
-        return "accessDenied";
-    }
+		if(!userService.isUserEmailUnique(user.getId(), user.getEmail())) {
+			FieldError emailError = new FieldError("user", "email", messageSource.getMessage("non.unique.email", new String[]{user.getEmail()}, Locale.getDefault()));
+			result.addError(emailError);
+			return "registration";
+		}
+		
+		userService.saveUser(user);
 
-    /**
-     * This method handles login GET requests.
-     * If users is already logged-in and tries to goto login page again, will be redirected to list page.
-     */
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String loginPage() {
-        if (isCurrentAuthenticationAnonymous()) {
-            return "login";
-        } else {
-            return "redirect:/main";
-        }
-    }
+		model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " registered successfully");
+		model.addAttribute("loggedinuser", getPrincipal());
+		//return "success";
+		return "registrationsuccess";
+	}
 
-    /**
-     * This method handles logout requests.
-     * Toggle the handlers if you are RememberMe functionality is useless in your app.
-     */
-    @RequestMapping(value="/logout", method = RequestMethod.GET)
-    public String logoutPage (HttpServletRequest request, HttpServletResponse response){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null){
-            //new SecurityContextLogoutHandler().logout(request, response, auth);
-            persistentTokenBasedRememberMeServices.logout(request, response, auth);
-            SecurityContextHolder.getContext().setAuthentication(null);
-        }
-        return "redirect:/login?logout";
-    }
+	/**
+	 * Update user by id.
+	 * @param id - id of user.
+	 * @param model - model for view.
+	 * @return Generated Page.
+	 */
+	@RequestMapping(value = {"/edit/user/{id}" }, method = RequestMethod.GET)
+	public String editUser(@PathVariable Integer id, ModelMap model) {
+		User user = userService.findById(id);
+		model.addAttribute("user", user);
+		model.addAttribute("edit", true);
+		model.addAttribute("loggedinuser", getPrincipalName());
+		return "registration";
+	}
 
-    /**
-     * This method returns the principal[user-name] of logged-in user.
-     */
-    private String getPrincipal(){
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	/**
+	 * This method handling POST request on updating user.
+	 * @param user user object.
+	 * @param result error-result.
+	 * @param model view model.
+	 * @param id id of user.
+	 * @return Generated page of success.
+	 */
+	@RequestMapping(value = {"/edit/user/{id}" }, method = RequestMethod.POST)
+	public String updateUser(@Valid User user, BindingResult result,
+							 ModelMap model, @PathVariable Integer id) {
+		if(result.hasErrors())
+			return "registration";
+		userService.updateUser(user);
+		model.addAttribute("success", "User " + user.getFirstName() + " "+ user.getLastName() + " updated successfully");
+		model.addAttribute("loggedinuser", getPrincipalName());
+		return "registrationsuccess";
+	}
 
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails)principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
-    }
+	@RequestMapping(value = {"/delete/user/{id}" }, method = RequestMethod.GET)
+	public String deleteUser(@PathVariable Integer id) {
+		userService.deleteUserById(id);
+		return "redirect:/list";
+	}
 
-    /**
-     * This method returns true if users is already authenticated [logged-in], else false.
-     */
-    private boolean isCurrentAuthenticationAnonymous() {
-        final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return authenticationTrustResolver.isAnonymous(authentication);
-    }
+	/**
+	 * This method will provide UserProfile list to views
+	 */
+	@ModelAttribute("roles")
+	public List<UserProfile> initializeProfiles() {
+		return userProfileService.findAll();
+	}
+	
+	/**
+	 * This method handles Access-Denied redirect.
+	 */
+	@RequestMapping(value = "/Access_Denied", method = RequestMethod.GET)
+	public String accessDeniedPage(ModelMap model) {
+		model.addAttribute("loggedinuser", getPrincipalName());
+		return "accessDenied";
+	}
+
+	/**
+	 * This method handles login GET requests.
+	 * If users is already logged-in and tries to goto login page again, will be redirected to list page.
+	 */
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String loginPage() {
+		if (isCurrentAuthenticationAnonymous()) {
+			return "login";
+	    } else {
+	    	return "redirect:/list";  
+	    }
+	}
+
+	/**
+	 * This method handles logout requests.
+	 * Toggle the handlers if you are RememberMe functionality is useless in your app.
+	 */
+	@RequestMapping(value="/logout", method = RequestMethod.GET)
+	public String logoutPage (HttpServletRequest request, HttpServletResponse response){
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null){    
+			//new SecurityContextLogoutHandler().logout(request, response, auth);
+			persistentTokenBasedRememberMeServices.logout(request, response, auth);
+			SecurityContextHolder.getContext().setAuthentication(null);
+		}
+		return "redirect:/login?logout";
+	}
+
+	/**
+	 * This method returns the principal[user-name] of logged-in user.
+	 */
+	private String getPrincipal(){
+		String userName = null;
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails)principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+		return userName;
+	}
+
+	private String getPrincipalName(){
+		User user = userService.findByEmail(getPrincipal());
+		return user.getFirstName() + " " + user.getLastName();
+	}
+	
+	/**
+	 * This method returns true if users is already authenticated [logged-in], else false.
+	 */
+	private boolean isCurrentAuthenticationAnonymous() {
+	    final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    return authenticationTrustResolver.isAnonymous(authentication);
+	}
 
 
 }

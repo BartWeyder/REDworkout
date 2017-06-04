@@ -6,13 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="RedWorkout" />
-        <module name="REDworkout" />
+        <module name="SpringMVCHibernateManyToManyCRUDExample" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="RedWorkout" target="1.8" />
-      <module name="REDworkout" target="1.8" />
+      <module name="SpringMVCHibernateManyToManyCRUDExample" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
