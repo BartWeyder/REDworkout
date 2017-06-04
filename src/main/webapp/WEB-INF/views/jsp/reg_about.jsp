@@ -5,7 +5,6 @@
   Time: 18:07
   To change this template use File | Settings | File Templates.
 -->
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
     <title>RegPage</title>
@@ -110,7 +109,19 @@
 </div>
 
 <div class="container">
-<h3> Why do you need it</h3>
+    <div class="row">
+        <div class="col-md-4"></div> 
+        <div class="col-md-4" align=center> 
+            <h3>WHY DO YOU NEED IT</h3>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="rov">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit sunt assumenda aut odio numquam soluta voluptate, maiores dolor, ipsa laboriosam consectetur repellendus praesentium at dolores ipsum nam asperiores libero rem!</div>
+        <div class="col-md-3"></div>
+    </div>
 </div>
+
 </body>
 </html>
