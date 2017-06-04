@@ -1,5 +1,5 @@
 package xyz.redworkout.model;
-
+//unsupported
 public class Analytics {
 
     private Statistics statistics;

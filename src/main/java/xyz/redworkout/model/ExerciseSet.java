@@ -3,7 +3,7 @@ package xyz.redworkout.model;
 import xyz.redworkout.exception.NoDataException;
 import xyz.redworkout.exception.NoDataExceptionSource;
 
-public class Set {
+public class ExerciseSet {
 
     private long work_time;
 
@@ -13,7 +13,7 @@ public class Set {
 
     private double weight;
     
-    public Set() {
+    public ExerciseSet() {
         
     }
 

@@ -1,5 +1,5 @@
 package xyz.redworkout.model;
-
+//unsupported yet
 import java.util.Date;
 
 public class Statistics {
