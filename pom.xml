@@ -7,7 +7,7 @@
     <groupId>xyz.redworkout</groupId>
     <artifactId>spring-mvc-project</artifactId>
     <packaging>war</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1-SNAPSHOT</version>
     <name>Training Application</name>
 
     <properties>
