@@ -5,54 +5,22 @@
   Time: 18:07
   To change this template use File | Settings | File Templates.
 -->
+
+
 <html lang="en">
 <head>
     <title>RegPage</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <style>
-        body{
-            background-color: rgb(255,255,255);
-        }
-        .centered-form{
-            margin-top: 60px;
-        }
-
-        .centered-form .panel{
-            background: rgba(255, 255, 255, 0.8);
-        }
-
-
-        .form-control {
-            border-radius:0;
-        }
-        .form-control:focus {
-            border-color: #cc181e;
-            outline: 0;
-            -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
-            box-shadow: inset 0 0 0 rgba(0,0,0,1),0 0 0 rgba(0,0,0,1);
-        }
-
-        .btn  {
-            color:rgb(255,255,255);
-            border-radius:0;
-            border-color: #cc181e;
-            background:rgb(204,24,30);
-        }
-        .btn:active {
-            color:rgb(255,255,255);
-            background:rgb(204,24,30)}
-
-        .btn:hover {
-            color:rgb(255,255,255);
-            background:rgb(204,24,30)}
-
-
-
+        <%@ include file="/static/css/app.css" %>
     </style>
+
 </head>
 
 <body>
