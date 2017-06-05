@@ -16,133 +16,213 @@
     <schema id="9" parent="1" name="websystique"/>
     <table id="10" parent="8" name="app_user"/>
     <table id="11" parent="8" name="app_user_user_profile"/>
-    <table id="12" parent="8" name="persistent_logins"/>
-    <table id="13" parent="8" name="user_profile"/>
-    <column id="14" parent="10" name="id">
+    <table id="12" parent="8" name="exercise_info"/>
+    <table id="13" parent="8" name="persistent_logins"/>
+    <table id="14" parent="8" name="training_info"/>
+    <table id="15" parent="8" name="user_profile"/>
+    <column id="16" parent="10" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="15" parent="10" name="password">
+    <column id="17" parent="10" name="password">
       <Position>2</Position>
       <DataType>varchar(100)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="16" parent="10" name="first_name">
+    <column id="18" parent="10" name="first_name">
       <Position>3</Position>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="17" parent="10" name="last_name">
+    <column id="19" parent="10" name="last_name">
       <Position>4</Position>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="18" parent="10" name="email">
+    <column id="20" parent="10" name="email">
       <Position>5</Position>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="19" parent="10" name="weight">
+    <column id="21" parent="10" name="weight">
       <Position>6</Position>
       <DataType>double|0</DataType>
     </column>
-    <column id="20" parent="10" name="height">
+    <column id="22" parent="10" name="height">
       <Position>7</Position>
       <DataType>double|0</DataType>
     </column>
-    <index id="21" parent="10" name="app_user_email_uindex">
+    <index id="23" parent="10" name="app_user_email_uindex">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="22" parent="10" name="PRIMARY">
+    <key id="24" parent="10" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="23" parent="10" name="app_user_email_uindex">
+    <key id="25" parent="10" name="app_user_email_uindex">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>app_user_email_uindex</UnderlyingIndexName>
     </key>
-    <column id="24" parent="11" name="user_id">
+    <column id="26" parent="11" name="user_id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="25" parent="11" name="user_profile_id">
+    <column id="27" parent="11" name="user_profile_id">
       <Position>2</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="26" parent="11" name="FK_USER_PROFILE">
+    <index id="28" parent="11" name="FK_USER_PROFILE">
       <ColNames>user_profile_id</ColNames>
     </index>
-    <key id="27" parent="11" name="PRIMARY">
+    <key id="29" parent="11" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>user_id
 user_profile_id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="28" parent="11" name="FK_APP_USER">
+    <foreign-key id="30" parent="11" name="FK_APP_USER">
       <ColNames>user_id</ColNames>
       <RefSchemaName>tutorial</RefSchemaName>
       <RefTableName>app_user</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="29" parent="11" name="FK_USER_PROFILE">
+    <foreign-key id="31" parent="11" name="FK_USER_PROFILE">
       <ColNames>user_profile_id</ColNames>
       <RefSchemaName>tutorial</RefSchemaName>
       <RefTableName>user_profile</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="30" parent="12" name="username">
-      <Position>1</Position>
-      <DataType>varchar(64)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="31" parent="12" name="series">
-      <Position>2</Position>
-      <DataType>varchar(64)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="32" parent="12" name="token">
-      <Position>3</Position>
-      <DataType>varchar(64)|0</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="33" parent="12" name="last_used">
-      <Position>4</Position>
-      <DataType>timestamp|0</DataType>
-      <NotNull>1</NotNull>
-      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
-    </column>
-    <key id="34" parent="12" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>series</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="35" parent="13" name="id">
+    <column id="32" parent="12" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="36" parent="13" name="type">
+    <column id="33" parent="12" name="exercise_name">
       <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="34" parent="12" name="exercise_description">
+      <Position>3</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="35" parent="12" name="exercise_tags">
+      <Position>4</Position>
       <DataType>varchar(30)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="37" parent="13" name="type">
-      <ColNames>type</ColNames>
+    <column id="36" parent="12" name="author_id">
+      <Position>6</Position>
+      <DataType>bigint(20)|0</DataType>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <column id="37" parent="12" name="public_access">
+      <Position>5</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+    </column>
+    <index id="38" parent="12" name="exercise_info_exercise_name_uindex">
+      <ColNames>exercise_name</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="38" parent="13" name="PRIMARY">
+    <index id="39" parent="12" name="exercise_info_app_user_id_fk">
+      <ColNames>author_id</ColNames>
+    </index>
+    <key id="40" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="39" parent="13" name="type">
+    <key id="41" parent="12" name="exercise_info_exercise_name_uindex">
+      <ColNames>exercise_name</ColNames>
+      <UnderlyingIndexName>exercise_info_exercise_name_uindex</UnderlyingIndexName>
+    </key>
+    <foreign-key id="42" parent="12" name="exercise_info_app_user_id_fk">
+      <ColNames>author_id</ColNames>
+      <RefSchemaName>tutorial</RefSchemaName>
+      <RefTableName>app_user</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="43" parent="13" name="username">
+      <Position>1</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="13" name="series">
+      <Position>2</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="13" name="token">
+      <Position>3</Position>
+      <DataType>varchar(64)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="13" name="last_used">
+      <Position>4</Position>
+      <DataType>timestamp|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>CURRENT_TIMESTAMP</DefaultExpression>
+    </column>
+    <key id="47" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>series</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="48" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="49" parent="14" name="training_name">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="50" parent="14" name="training_description">
+      <Position>3</Position>
+      <DataType>multilinestring|0</DataType>
+    </column>
+    <column id="51" parent="14" name="course_id">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="52" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="53" parent="15" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="54" parent="15" name="type">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="55" parent="15" name="type">
+      <ColNames>type</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="56" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="57" parent="15" name="type">
       <ColNames>type</ColNames>
       <UnderlyingIndexName>type</UnderlyingIndexName>
     </key>

@@ -28,6 +28,8 @@ import xyz.redworkout.model.User;
 import xyz.redworkout.model.UserProfile;
 import xyz.redworkout.service.UserProfileService;
 import xyz.redworkout.service.UserService;
+import xyz.redworkout.model.ExerciseInfo;
+import xyz.redworkout.service.ExerciseInfoService;
 
 
 @Controller
@@ -40,6 +42,9 @@ public class AppController {
 	
 	@Autowired
 	UserProfileService userProfileService;
+
+	@Autowired
+	ExerciseInfoService exerciseInfoService;
 	
 	@Autowired
 	MessageSource messageSource;
@@ -89,21 +94,6 @@ public class AppController {
 		if (result.hasErrors()) {
 			return "registration";
 		}
-
-		/*
-		 * Preferred way to achieve uniqueness of field [sso] should be implementing custom @Unique annotation 
-		 * and applying it on field [sso] of Model class [User].
-		 * 
-		 * Below mentioned peace of code [if block] is to demonstrate that you can fill custom errors outside the validation
-		 * framework as well while still using internationalized messages.
-		 * 
-		 */
-
-		/*if(!userService.isUserSSOUnique(user.getId(), user.getSsoId())){
-			FieldError ssoError =new FieldError("user","ssoId",messageSource.getMessage("non.unique.ssoId", new String[]{user.getSsoId()}, Locale.getDefault()));
-		    result.addError(ssoError);
-			return "registration";
-		}*/
 
 		if(!userService.isUserEmailUnique(user.getId(), user.getEmail())) {
 			FieldError emailError = new FieldError("user", "email", messageSource.getMessage("non.unique.email", new String[]{user.getEmail()}, Locale.getDefault()));
@@ -202,6 +192,33 @@ public class AppController {
 			SecurityContextHolder.getContext().setAuthentication(null);
 		}
 		return "redirect:/login?logout";
+	}
+
+	/**
+	 * Adds new exercise.
+	 * TODO: change return when new form will be created, make new POST method.
+	 * 	 */
+	@RequestMapping(value = "/add/exercise", method = RequestMethod.GET)
+	public String addExercisePage(ModelMap model) {
+		ExerciseInfo exerciseInfo = new ExerciseInfo();
+		exerciseInfo.setPublicAccess(false);
+		exerciseInfo.setDescription("That's really hard");
+		exerciseInfo.setTags("Arms");
+		exerciseInfo.setExerciseName("Jerking very hard");
+		User user = userService.findById(1);
+		if (user == null)
+			System.out.println("USER IS EMPTY");
+		else
+			exerciseInfo.setAuthor(user);
+
+		if (!exerciseInfoService.isNameUnique(exerciseInfo.getId(), exerciseInfo.getExerciseName()))
+			return "redirect:/error";
+
+		exerciseInfoService.saveExerciseInfo(exerciseInfo);
+		List<ExerciseInfo> list = exerciseInfoService.findAllExercises();
+		ExerciseInfo info = list.get(0);
+		model.addAttribute("info", info);
+		return "index";
 	}
 
 	/**

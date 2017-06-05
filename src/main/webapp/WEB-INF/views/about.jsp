@@ -12,5 +12,6 @@
 </head>
 <body>
     <h1>This is about page.</h1>
+    <p>${info}</p>
 </body>
 </html>

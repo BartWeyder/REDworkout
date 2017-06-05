@@ -25,7 +25,7 @@ public class Training {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public Exercise getExercise() {
+    public ExerciseInfo getExercise() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
