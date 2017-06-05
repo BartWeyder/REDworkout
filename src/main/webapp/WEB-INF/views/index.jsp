@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: bartw
@@ -12,5 +13,9 @@
 </head>
 <body>
     <h1>Hello Page.</h1>
+    <c:forEach items="${exercises}" var="exercise">
+        <h2>${exercise.exerciseName}</h2>
+
+    </c:forEach>
 </body>
 </html>

@@ -38,7 +38,6 @@ public class ExerciseInfo implements Serializable {
      * TODO: solve choice of cascade type.
      */
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    //@Column(name = "author_id")
     private User author;
 
 

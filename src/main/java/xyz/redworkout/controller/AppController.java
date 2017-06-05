@@ -1,7 +1,10 @@
 package xyz.redworkout.controller;
 
+import java.lang.reflect.Array;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,12 +28,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import xyz.redworkout.model.User;
-import xyz.redworkout.model.UserProfile;
-import xyz.redworkout.service.UserProfileService;
-import xyz.redworkout.service.UserService;
-import xyz.redworkout.model.ExerciseInfo;
-import xyz.redworkout.service.ExerciseInfoService;
+import xyz.redworkout.model.*;
+import xyz.redworkout.service.*;
 
 
 @Controller
@@ -45,6 +45,12 @@ public class AppController {
 
 	@Autowired
 	ExerciseInfoService exerciseInfoService;
+
+	@Autowired
+	TrainingInfoService trainingInfoService;
+
+	@Autowired
+	CourseInfoService courseInfoService;
 	
 	@Autowired
 	MessageSource messageSource;
@@ -218,6 +224,27 @@ public class AppController {
 		List<ExerciseInfo> list = exerciseInfoService.findAllExercises();
 		ExerciseInfo info = list.get(0);
 		model.addAttribute("info", info);
+		return "index";
+	}
+
+	/**
+	 *TODO:change this method, add for post.
+	 */
+	@RequestMapping(value = "/add/training", method = RequestMethod.GET)
+	public String addTraining(ModelMap model) {
+		/*TrainingInfo trainingInfo = new TrainingInfo();
+		trainingInfo.setCourse(courseInfoService.findCourseInfoById(1));
+		trainingInfo.setTrainingDescription("This is third training, so be careful with your python");
+		trainingInfo.setTrainingName("Becoming Popular");
+		trainingInfo.setExercises(exerciseInfoService.findAllExercises());
+		trainingInfoService.saveTrainingInfo(trainingInfo);
+
+		model.addAttribute("trainingInfo", trainingInfo.toString());*/
+		/*List<TrainingInfo> infoList =courseInfoService.findCourseInfoById(1).getTrainingInfoList();
+		List<ExerciseInfo> exerciseList = infoList.get(0).getExercises();
+		model.addAttribute("exercises", exerciseList);*/
+		TrainingInfo trainingInfo = trainingInfoService.findById(1);
+		List<ExerciseInfo> exerciseInfoList = trainingInfo.getExercises();
 		return "index";
 	}
 
