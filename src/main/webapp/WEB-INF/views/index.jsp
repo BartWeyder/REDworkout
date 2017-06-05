@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Настя
@@ -15,9 +16,12 @@
 </head>
 <body>
 
+
 <jsp:include page="fragments/header.jsp" />
 
 <jsp:include page="fragments/footer.jsp" />
+
+
 
 </body>
 </html>
