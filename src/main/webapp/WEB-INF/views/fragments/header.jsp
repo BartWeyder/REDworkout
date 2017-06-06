@@ -14,7 +14,7 @@
                       <li class="dropdown">
                          <a class="dropdown-toggle" data-toggle="dropdown" href="#" > User data <b class="caret"></b></a>
                           <ul class="dropdown-menu">
-                              <li><a href="#">My profile</a></li>
+                              <li><a href="my profile.jsp">My profile</a></li>
                               <li><a href="#">Active course</a></li>
                               <li><a href="#">All courses</a></li>
                           </ul>

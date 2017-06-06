@@ -6,6 +6,6 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<footer>
-        <p class="text-muted"> © REDworkout | Privacy Policy </p>
-</footer>
+    <footer>
+        <p class="text-muted">&copy; REDworkout | Privacy Policy </p>
+    </footer>
