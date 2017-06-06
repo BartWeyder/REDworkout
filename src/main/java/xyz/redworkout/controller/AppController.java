@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -125,6 +126,38 @@ public class AppController {
 		model.addAttribute("loggedinuser", getPrincipal());
 		//return "success";
 		return "registrationsuccess";
+	}
+
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String signUp(ModelMap model)  {
+		/*
+		check for admin
+		User user = userService.findByEmail(getPrincipal());
+		if (user != null) {
+			for(UserProfile test:user.getUserProfiles()) {
+				if (test.getType().equals(UserProfileType.ADMIN.getUserProfileType()))
+					model.addAttribute("admin", true);
+			}
+		}*/
+
+		/*if(SecurityContextHolder.getContext().getAuthentication() == null)
+			return "redirect:/main";
+		*/
+		boolean anon;
+		try {
+			anon = isCurrentAuthenticationAnonymous();
+		} catch (NullPointerException e) {
+			anon = true;
+		}
+
+		if (!anon)
+			return "redirect:/main";
+
+		User user = new User();
+		model.addAttribute("user", user);
+		model.addAttribute("edit", false);
+		model.addAttribute("admin", false);
+		return "registration";
 	}
 
 	/**

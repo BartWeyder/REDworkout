@@ -39,7 +39,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/main", "/list")
 				.access("hasRole('USER') or hasRole('ADMIN')")
 				.antMatchers("/newuser/**", "/delete/user/*").access("hasRole('ADMIN')").antMatchers("/edit/user/*")
-				.access("hasRole('ADMIN') or hasRole('DBA')").and().formLogin().loginPage("/login")
+				.access("hasRole('ADMIN') or hasRole('DBA')")
+
+				.and().formLogin().loginPage("/login")
 				.loginProcessingUrl("/login").usernameParameter("email").passwordParameter("password").and()
 				.rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
 				.tokenValiditySeconds(86400).and().csrf().and().exceptionHandling().accessDeniedPage("/Access_Denied");

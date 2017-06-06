@@ -14,9 +14,7 @@
 
 <body>
  	<div class="generic-container">
-		<%@include file="authheader.jsp" %>
-
-		<div class="well lead">User Registration Form</div>
+		<div class="well registration-well lead">User Registration Form</div>
 	 	<form:form method="POST" modelAttribute="user" class="form-horizontal">
 			<form:input type="hidden" path="id" id="id"/>
 			
@@ -67,19 +65,22 @@
 					</div>
 				</div>
 			</div>
-	
-			<div class="row">
-				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="userProfiles">Roles</label>
-					<div class="col-md-7">
-						<form:select path="userProfiles" items="${roles}" multiple="true" itemValue="id" itemLabel="type" class="form-control input-sm" />
-						<div class="has-error">
-							<form:errors path="userProfiles" class="help-inline"/>
+
+			<c:choose>
+				<c:when test="${admin}">
+					<div class="row">
+						<div class="form-group col-md-12">
+							<label class="col-md-3 control-lable" for="userProfiles">Roles</label>
+							<div class="col-md-7">
+								<form:select path="userProfiles" items="${roles}" multiple="true" itemValue="id" itemLabel="type" class="form-control input-sm" />
+								<div class="has-error">
+									<form:errors path="userProfiles" class="help-inline"/>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</div>
-
+				</c:when>
+			</c:choose>
 			<div class="row">
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="userProfiles">Weight</label>
@@ -108,10 +109,10 @@
 				<div class="form-actions floatRight">
 					<c:choose>
 						<c:when test="${edit}">
-							<input type="submit" value="Update" class="btn btn-primary btn-sm"/> or <a href="<c:url value='/list' />">Cancel</a>
+							<input type="submit" value="Update" class="btn btn-danger btn-md"/> or <a href="<c:url value='/list' />">Cancel</a>
 						</c:when>
 						<c:otherwise>
-							<input type="submit" value="Register" class="btn btn-primary btn-sm"/> or <a href="<c:url value='/list' />">Cancel</a>
+							<input type="submit" value="Register" class="btn btn-danger btn-md"/> or <a href="<c:url value='/list' />">Cancel</a>
 						</c:otherwise>
 					</c:choose>
 				</div>
