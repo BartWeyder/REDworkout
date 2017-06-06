@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="REDworkout:war exploded">
-    <output-path>$PROJECT_DIR$/classes/artifacts/REDworkout_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/SpringMVCHibernateWithSpringSecurityExample</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -40,10 +40,13 @@
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-classic:1.1.7" />
           <element id="library" level="project" name="Maven: ch.qos.logback:logback-core:1.1.7" />
           <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.7.20" />
-          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
           <element id="library" level="project" name="Maven: javax.servlet.jsp:javax.servlet.jsp-api:2.3.1" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
         </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/SpringMVCHibernateWithSpringSecurityExample/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="REDworkout/web/Web" />
     </root>
