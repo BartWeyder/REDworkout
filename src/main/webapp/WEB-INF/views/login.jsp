@@ -4,6 +4,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+		<jsp:include page="fragments/head_default.jsp" />
 		<title>Login page</title>
 		<link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet"></link>
 		<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
@@ -11,8 +12,12 @@
 	</head>
 
 	<body>
+	<jsp:include page="fragments/header.jsp" />
 		<div id="mainWrapper">
-			<div class="login-container">
+			<div class="login-container panel panel-danger panel-info">
+			            <div class="panel-heading">
+              <h3 class="panel-title">Log in</h3>
+            </div>
 				<div class="login-card">
 					<div class="login-form">
 						<c:url var="loginUrl" value="/login" />
@@ -44,13 +49,22 @@
 								
 							<div class="form-actions">
 								<input type="submit"
-									class="btn btn-block btn-primary btn-default" value="Log in">
+									class="btn btn-block btn-danger" value="Log in">
 							</div>
 						</form>
 					</div>
 				</div>
+                <p class="linksignup">Don't have an account? <a href="#" style="color:blue">Sign up</a> for free</p>
 			</div>
 		</div>
 
+
+        <p class="text">
+            If you are here it means you are a sportive person who likes improving himself and strives to the ideal physique. <br>But does any aim that person can achieve without systematization exist? So it's important to track your trainings. 
+            <br>And our site helps you with it! 
+            <br>Choose existing course of trainings or create your own one, type details about each and every training and see your progress!
+        </p>
+		
+<jsp:include page="fragments/footer.jsp" />
 	</body>
 </html>
