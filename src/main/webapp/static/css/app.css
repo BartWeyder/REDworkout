@@ -1,13 +1,16 @@
+/*
 html{
 	background-color:#2F2F2F;
 }
+*/
 
 body{
 	height: 100%;
-	background-color:rgb(245, 245, 245);
+/*	background-color:rgb(245, 245, 245);*/
 }
 
 
+/*
 #mainWrapper {
 	height: 100%;
 	background-image: -webkit-gradient(
@@ -25,6 +28,7 @@ background-image: -webkit-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 1
 background-image: -ms-linear-gradient(top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
 background-image: linear-gradient(to top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, #AAAAAA 100%);
 }
+*/
 
 .floatRight{
 	float:right;
@@ -36,11 +40,16 @@ background-image: linear-gradient(to top, #EDEDED 0%, #EAEAEA 8%, #2F2F2F 100%, 
 }
 
 .generic-container {
-  position:relative;
+  position:fixed;
   width:80%;
-  margin: auto;
+  margin-left: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   padding: 20px;
   background-color: #EAE7E7;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 0 30px black;
 }
 
 .custom-width {
@@ -53,15 +62,14 @@ body, #mainWrapper, .form-control{
 
 #mainWrapper {
 	/*height: 720px; Without explicit px values, % in children's does not work*/
-	height: 100vh; /*with Viewport-Percentage, we can handles all devices screens  */
+/*	height: 100vh; with Viewport-Percentage, we can handles all devices screens  */
 	padding-left:10px;
 	padding-right:10px;
-	padding-bottom:10px;
 }
 
 .login-container {
-    margin-top: 100px;
-    background-color: floralwhite;
+    margin-top: 10px;
+    background-color: white;
     width: 40%;
     left: 30%;
     position: absolute;
@@ -78,9 +86,4 @@ body, #mainWrapper, .form-control{
 
 .authbar{
 	margin-bottom:15px;
-}
-
-.registration-well {
-	background-color: #ff4943 !important;
-	color: white!important;
 }

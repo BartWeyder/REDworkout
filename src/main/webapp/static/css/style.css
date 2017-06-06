@@ -55,10 +55,10 @@ header > .container {
     display: inline-block;
 /*    margin-left: auto;*/
     text-align: center;
-    font-size: 1.7em;
+    font-size: 1.4em;
     position: absolute;
     width: 100%;
-    bottom: 3em;
+    bottom: 2em;
 /*    height: 35vh; */
     background-color: #fff;
     opacity: 0.7;
