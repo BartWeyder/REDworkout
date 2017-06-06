@@ -51,6 +51,18 @@ public class AppController {
 
 	@Autowired
 	CourseInfoService courseInfoService;
+
+	@Autowired
+	CourseService courseService;
+
+	@Autowired
+	TrainingService trainingService;
+
+	@Autowired
+	ExerciseService exerciseService;
+
+	@Autowired
+	ExerciseSetService exerciseSetService;
 	
 	@Autowired
 	MessageSource messageSource;
@@ -245,6 +257,11 @@ public class AppController {
 		model.addAttribute("exercises", exerciseList);*/
 		TrainingInfo trainingInfo = trainingInfoService.findById(1);
 		List<ExerciseInfo> exerciseInfoList = trainingInfo.getExercises();
+		return "index";
+	}
+
+	@RequestMapping(value = "/add/test", method = RequestMethod.GET)
+	public String addMethod(ModelMap model) {
 		return "index";
 	}
 

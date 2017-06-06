@@ -1,57 +1,54 @@
 package xyz.redworkout.model;
 
-import xyz.redworkout.exception.NoDataException;
-import xyz.redworkout.exception.NoDataExceptionSource;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class ExerciseSet {
+@Entity
+@Table(name = "exercise_set")
+public class ExerciseSet implements Serializable {
 
-    private long work_time;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
 
-    private long relax_time;
+    @Column(name = "weight")
+    private Double weight;
 
-    private int reps;
+    @Column(name = "reps")
+    private Integer reps;
 
-    private double weight;
-    
-    public ExerciseSet() {
-        
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Exercise exercise;
+
+    public Integer getId() {
+        return id;
     }
 
-    public void setWorkTime(long work_time) {
-        this.work_time = work_time;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setRelaxTime(long relax_time) {
-        this.relax_time = relax_time;
+    public Double getWeight() {
+        return weight;
     }
 
-    public String getWorkTime() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void setWeight(Double weight) {
+        this.weight = weight;
     }
 
-    public String getRelaxTime() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Integer getReps() {
+        return reps;
     }
 
-    public void setWeight(String weight) throws NumberFormatException {
-        try {
-            Double doubleWeight = Double.parseDouble(weight);
-            if (doubleWeight < 0 || doubleWeight > 2000)
-                throw new NumberFormatException("Invalid data");
-        } catch (NumberFormatException e) {
-            System.out.println("//error");
-        }
+    public void setReps(Integer reps) {
+        this.reps = reps;
     }
 
-    public double getWeight() throws NoDataException {
-        NoDataExceptionSource exceptionSource = new NoDataExceptionSource();
-        try {
-            Double weight = exceptionSource.possibleWeightExceptionSource();
-        } catch (NoDataException exception)
-        {
-            //code to send message to user
-        }
-        //change later
-        return 0.0;
+    public Exercise getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
     }
 }
