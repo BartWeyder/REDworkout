@@ -53,6 +53,9 @@ public class UserServiceImpl implements UserService{
 			entity.setWeight(user.getWeight());
 			entity.setHeight(user.getHeight());
 			entity.setUserProfiles(user.getUserProfiles());
+			entity.setCourseInfoList(user.getCourseInfoList());
+			entity.setCourseList(user.getCourseList());
+			entity.setExerciseInfoList(user.getExerciseInfoList());
 		}
 	}
 

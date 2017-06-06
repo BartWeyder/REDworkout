@@ -8,4 +8,3 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <footer>
         <p class="text-muted">&copy; REDworkout | Privacy Policy </p>
-    </footer>

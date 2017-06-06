@@ -23,6 +23,9 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		User user = getByKey(id);
 		if(user!=null){
 			Hibernate.initialize(user.getUserProfiles());
+			Hibernate.initialize(user.getCourseInfoList());
+			Hibernate.initialize(user.getCourseList());
+			Hibernate.initialize(user.getExerciseInfoList());
 		}
 		return user;
 	}

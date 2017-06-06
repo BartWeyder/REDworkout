@@ -1,19 +1,12 @@
 package xyz.redworkout.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -52,6 +45,20 @@ public class User implements Serializable{
              joinColumns = { @JoinColumn(name = "USER_ID") }, 
              inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
 	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
+	private List<Course> courseList = new ArrayList<>();
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
+	private List<CourseInfo> courseInfoList = new ArrayList<>();
+
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
+	private List<ExerciseInfo> exerciseInfoList = new ArrayList<>();
+
+
 
 	public Integer getId() {
 		return id;
@@ -115,6 +122,30 @@ public class User implements Serializable{
 
 	public void setUserProfiles(Set<UserProfile> userProfiles) {
 		this.userProfiles = userProfiles;
+	}
+
+	public List<Course> getCourseList() {
+		return courseList;
+	}
+
+	public void setCourseList(List<Course> courseList) {
+		this.courseList = courseList;
+	}
+
+	public List<CourseInfo> getCourseInfoList() {
+		return courseInfoList;
+	}
+
+	public void setCourseInfoList(List<CourseInfo> courseInfoList) {
+		this.courseInfoList = courseInfoList;
+	}
+
+	public List<ExerciseInfo> getExerciseInfoList() {
+		return exerciseInfoList;
+	}
+
+	public void setExerciseInfoList(List<ExerciseInfo> exerciseInfoList) {
+		this.exerciseInfoList = exerciseInfoList;
 	}
 
 	@Override

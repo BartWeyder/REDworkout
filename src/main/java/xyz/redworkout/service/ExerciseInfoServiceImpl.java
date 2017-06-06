@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import xyz.redworkout.dao.ExerciseInfoDao;
 import xyz.redworkout.model.ExerciseInfo;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.ArrayList;
 

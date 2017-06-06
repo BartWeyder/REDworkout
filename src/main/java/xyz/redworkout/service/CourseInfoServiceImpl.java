@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import xyz.redworkout.dao.CourseInfoDao;
 import xyz.redworkout.model.CourseInfo;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 /**
