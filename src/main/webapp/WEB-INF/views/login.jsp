@@ -6,8 +6,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<jsp:include page="fragments/head_default.jsp" />
 		<title>Login page</title>
-		<link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet"></link>
-		<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
+		<link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet" />
+		<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"/ >
 		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
 	</head>
 
@@ -54,7 +54,7 @@
 						</form>
 					</div>
 				</div>
-                <p class="linksignup">Don't have an account? <a href="#" style="color:blue">Sign up</a> for free</p>
+                <p class="linksignup">Don't have an account? <a href="<c:url value="/signup" /> " style="color:blue">Sign up</a> for free</p>
 			</div>
 		</div>
 

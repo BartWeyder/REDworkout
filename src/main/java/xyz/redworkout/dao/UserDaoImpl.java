@@ -1,6 +1,7 @@
 package xyz.redworkout.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import xyz.redworkout.model.Course;
 import xyz.redworkout.model.User;
 
 
@@ -24,7 +26,11 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		if(user!=null){
 			Hibernate.initialize(user.getUserProfiles());
 			Hibernate.initialize(user.getCourseInfoList());
-			Hibernate.initialize(user.getCourseList());
+			Set<Course> courses = user.getCourseList();
+			Hibernate.initialize(courses);
+			for (Course course : courses) {
+				Hibernate.initialize(course);
+			}
 			Hibernate.initialize(user.getExerciseInfoList());
 		}
 		return user;

@@ -1,16 +1,11 @@
 package xyz.redworkout.controller;
 
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -19,7 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -90,15 +84,33 @@ public class AppController {
 		return "userslist";
 	}
 
-	/**
-	 * This method will provide the medium to add a new user.
-	 */
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.GET)
-	public String newUser(ModelMap model) {
+
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public String signUp(ModelMap model)  {
+		/*
+		check for admin
+		User user = userService.findByEmail(getPrincipal());
+		if (user != null) {
+			for(UserProfile test:user.getUserProfiles()) {
+				if (test.getType().equals(UserProfileType.ADMIN.getUserProfileType()))
+					model.addAttribute("admin", true);
+			}
+		}*/
+
+		boolean anon;
+		try {
+			anon = isCurrentAuthenticationAnonymous();
+		} catch (NullPointerException e) {
+			anon = true;
+		}
+
+		if (!anon)
+			return "redirect:/main";
+
 		User user = new User();
 		model.addAttribute("user", user);
 		model.addAttribute("edit", false);
-		model.addAttribute("loggedinuser", getPrincipalName());
+		model.addAttribute("admin", false);
 		return "registration";
 	}
 
@@ -106,9 +118,13 @@ public class AppController {
 	 * This method will be called on form submission, handling POST request for
 	 * saving user in database. It also validates the user input
 	 */
-	@RequestMapping(value = { "/newuser" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/signup" }, method = RequestMethod.POST)
 	public String saveUser(@Valid User user, BindingResult result,
 			ModelMap model) {
+		Set<UserProfile> set = new HashSet<>();
+
+		set.add(userProfileService.findById(1));
+		user.setUserProfiles(set);
 
 		if (result.hasErrors()) {
 			return "registration";
@@ -128,37 +144,7 @@ public class AppController {
 		return "registrationsuccess";
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public String signUp(ModelMap model)  {
-		/*
-		check for admin
-		User user = userService.findByEmail(getPrincipal());
-		if (user != null) {
-			for(UserProfile test:user.getUserProfiles()) {
-				if (test.getType().equals(UserProfileType.ADMIN.getUserProfileType()))
-					model.addAttribute("admin", true);
-			}
-		}*/
 
-		/*if(SecurityContextHolder.getContext().getAuthentication() == null)
-			return "redirect:/main";
-		*/
-		boolean anon;
-		try {
-			anon = isCurrentAuthenticationAnonymous();
-		} catch (NullPointerException e) {
-			anon = true;
-		}
-
-		if (!anon)
-			return "redirect:/main";
-
-		User user = new User();
-		model.addAttribute("user", user);
-		model.addAttribute("edit", false);
-		model.addAttribute("admin", false);
-		return "registration";
-	}
 
 	/**
 	 * Update user by id.
@@ -277,17 +263,6 @@ public class AppController {
 	 */
 	@RequestMapping(value = "/add/training", method = RequestMethod.GET)
 	public String addTraining(ModelMap model) {
-		/*TrainingInfo trainingInfo = new TrainingInfo();
-		trainingInfo.setCourse(courseInfoService.findCourseInfoById(1));
-		trainingInfo.setTrainingDescription("This is third training, so be careful with your python");
-		trainingInfo.setTrainingName("Becoming Popular");
-		trainingInfo.setExercises(exerciseInfoService.findAllExercises());
-		trainingInfoService.saveTrainingInfo(trainingInfo);
-
-		model.addAttribute("trainingInfo", trainingInfo.toString());*/
-		/*List<TrainingInfo> infoList =courseInfoService.findCourseInfoById(1).getTrainingInfoList();
-		List<ExerciseInfo> exerciseList = infoList.get(0).getExercises();
-		model.addAttribute("exercises", exerciseList);*/
 		TrainingInfo trainingInfo = trainingInfoService.findById(1);
 		List<ExerciseInfo> exerciseInfoList = trainingInfo.getExercises();
 		return "index";
@@ -295,6 +270,12 @@ public class AppController {
 
 	@RequestMapping(value = "/add/test", method = RequestMethod.GET)
 	public String addMethod(ModelMap model) {
+		return "index";
+	}
+
+	@RequestMapping(value = "/start/course/{id}", method = RequestMethod.GET)
+	public String startCourse(ModelMap model, @PathVariable Integer id) {
+		Course course = courseService.findById(id);
 		return "index";
 	}
 

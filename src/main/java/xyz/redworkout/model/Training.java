@@ -28,6 +28,7 @@ public class Training implements Serializable{
     private Date date;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "training_info_id")
     private TrainingInfo trainingInfo;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

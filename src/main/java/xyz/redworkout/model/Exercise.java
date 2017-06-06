@@ -18,6 +18,7 @@ public class Exercise implements Serializable {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "exercise_info_id")
     private ExerciseInfo exerciseInfo;
 
     @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.MERGE)

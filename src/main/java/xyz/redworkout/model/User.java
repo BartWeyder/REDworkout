@@ -39,7 +39,6 @@ public class User implements Serializable{
 	@Column(name = "HEIGHT")
 	private Double height;
 
-	@NotEmpty
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "APP_USER_USER_PROFILE", 
              joinColumns = { @JoinColumn(name = "USER_ID") }, 
@@ -48,15 +47,15 @@ public class User implements Serializable{
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")
-	private List<Course> courseList = new ArrayList<>();
+	private Set<Course> courseList = new HashSet<>();
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")
-	private List<CourseInfo> courseInfoList = new ArrayList<>();
+	private Set<CourseInfo> courseInfoList = new HashSet<>();
 
 	@OneToMany(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id")
-	private List<ExerciseInfo> exerciseInfoList = new ArrayList<>();
+	private Set<ExerciseInfo> exerciseInfoList = new HashSet<>();
 
 
 
@@ -124,27 +123,27 @@ public class User implements Serializable{
 		this.userProfiles = userProfiles;
 	}
 
-	public List<Course> getCourseList() {
+	public Set<Course> getCourseList() {
 		return courseList;
 	}
 
-	public void setCourseList(List<Course> courseList) {
+	public void setCourseList(Set<Course> courseList) {
 		this.courseList = courseList;
 	}
 
-	public List<CourseInfo> getCourseInfoList() {
+	public Set<CourseInfo> getCourseInfoList() {
 		return courseInfoList;
 	}
 
-	public void setCourseInfoList(List<CourseInfo> courseInfoList) {
+	public void setCourseInfoList(Set<CourseInfo> courseInfoList) {
 		this.courseInfoList = courseInfoList;
 	}
 
-	public List<ExerciseInfo> getExerciseInfoList() {
+	public Set<ExerciseInfo> getExerciseInfoList() {
 		return exerciseInfoList;
 	}
 
-	public void setExerciseInfoList(List<ExerciseInfo> exerciseInfoList) {
+	public void setExerciseInfoList(Set<ExerciseInfo> exerciseInfoList) {
 		this.exerciseInfoList = exerciseInfoList;
 	}
 
