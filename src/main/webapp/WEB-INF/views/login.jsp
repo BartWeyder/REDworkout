@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 		<jsp:include page="fragments/head_default.jsp" />
 		<title>Login page</title>
-		<link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet" />
-		<link href="<c:url value='/static/css/app.css' />" rel="stylesheet" />
+		<link href="<c:url value='/static/css/bootstrap.css' />"  rel="stylesheet"></link>
+		<link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link>
 		<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
 	</head>
 
@@ -62,7 +61,7 @@
 
         <p class="text">
             If you are here it means you are a sportive person who likes improving himself and strives to the ideal physique. <br>But does any aim that person can achieve without systematization exist? So it's important to track your trainings. 
-            <br>And our site helps you with it! 
+            And our site helps you with it! 
             <br>Choose existing course of trainings or create your own one, type details about each and every training and see your progress!
         </p>
 		
