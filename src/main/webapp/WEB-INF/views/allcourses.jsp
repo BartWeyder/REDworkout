@@ -11,8 +11,13 @@
 
 	<body>
 	<jsp:include page="fragments/header.jsp" />
-	
-<div class="container">
+
+	<div class="container">
+          <a href="#" class="btn btn-danger"> + Add new course</a>           					
+      </div>
+     
+							   
+ <div class="container">
      <div class="row">
         <div class="container">
         <h2>Available courses</h2>
@@ -23,35 +28,42 @@
      <div class="row" >
          <div  class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
             <div class="thumbnail">
-			 <img src="<c:url value='/static/img/thumbnail.png' alt="Course pic"/>"
-            <img src="http://placehold.it/400x240/" alt="">
+             <img src="<c:url value='/static/img/thumbnail.png' alt="Course pic"/>"	
              <div class="caption">
                  <h4>Course name1</h4>
                  <p>Course name1 description</p>
-                 <a href="#" class="btn btn-success">Read more</a>
+                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Read more</button>
+                 
+                 
+                  <!-- Modal -->
+                          <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+
+                              <!-- Modal content-->
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">Course name1</h4>
+                                </div>
+                                <div class="modal-body">
+                                <b>Duration of the course:</b> <span></span> 
+                            <br><b> Count of trainings per week:</b> <span></span>
+                            <br><b> Price for the whole course: </b> <span></span>
+ 
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-inverse" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+                 
+                 
              </div>
             </div>
          </div>
-         <div  class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-            <div class="thumbnail">
-            <img src="http://placehold.it/400x240/" alt="">
-             <div class="caption">
-                 <h4>Course name2</h4>
-                 <p>Course name2 description</p>
-                 <a href="#" class="btn btn-success">Read more</a>
-             </div>
-            </div>
-         </div>
-         <div  class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-            <div class="thumbnail">
-            <img src="http://placehold.it/400x240/" alt="">
-             <div class="caption">
-                 <h4>Course name3</h4>
-                 <p>Course name3 description</p>
-                 <a href="#" class="btn btn-success">Read more</a>
-             </div>
-            </div>
-         </div>                  
+         
 
      </div> 
  </div>
