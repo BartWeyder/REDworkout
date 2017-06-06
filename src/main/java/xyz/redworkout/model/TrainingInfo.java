@@ -26,7 +26,7 @@ public class TrainingInfo implements Serializable{
     private String trainingDescription;
 
     //@NotEmpty
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
     private CourseInfo course;
 

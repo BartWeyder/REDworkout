@@ -17,11 +17,11 @@ public class Exercise implements Serializable {
     @Column(name = "id")
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "exercise_info_id")
     private ExerciseInfo exerciseInfo;
 
-    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Training training;
 
     @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)

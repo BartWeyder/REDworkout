@@ -1,0 +1,12 @@
+body {
+    height: 100%;
+}
+
+.custom-panel-color {
+    background-color: #ff4943!important;
+    border-color: #ff4943!important;
+}
+
+.panel-border {
+    border-color: #ff4943!important;
+}

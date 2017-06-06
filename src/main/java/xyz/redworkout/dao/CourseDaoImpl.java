@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.redworkout.model.Course;
 
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
  * Created by Eugenij Kizim on 06-Jun-17.
  */
 @Repository("courseDao")
+@Transactional
 public class CourseDaoImpl extends AbstractDao<Integer, Course> implements CourseDao{
     @Override
     public Course findById(Integer id) {

@@ -55,6 +55,6 @@ body, #mainWrapper, .form-control{
 	margin-bottom:15px;
 }
 .registration-well {
-    background-color: #ff4943;
+    background-color: #ff4943!important;
     color: white;
 }

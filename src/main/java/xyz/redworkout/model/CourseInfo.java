@@ -42,7 +42,7 @@ public class CourseInfo implements Serializable{
     @Column(name = "price")
     private Double price;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User author;
 
     @OneToMany(fetch = FetchType.LAZY)

@@ -14,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -67,14 +68,44 @@ public class AppController {
 	
 	@Autowired
 	AuthenticationTrustResolver authenticationTrustResolver;
-	
+
+
+	/**
+	 *
+	 *
+	 */
+	@Transactional
+	@RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+	public String mainPage(ModelMap model) {
+		if (isCurrentAuthenticationAnonymous())
+			return "redirect:/login";
+		else {
+			Course course1 = courseService.findById(1);
+			User user = userService.findByEmail(getPrincipal());
+			Set<Course> courses = user.getCourseList();
+			CourseInfo activeCourse;
+			for (Course course: courses) {
+				if (course.isActive()) {
+					activeCourse = course.getCourseInfo();
+					model.addAttribute("courseName", activeCourse.getCourseName());
+					model.addAttribute("courseDescription", activeCourse.getCourseDescription());
+					model.addAttribute("trainingsDone", course.getTrainingsDone());
+					model.addAttribute("trainingsAmount", activeCourse.getDuration() * activeCourse.getTrainingsPerWeek());
+					model.addAttribute("active", true);
+				}
+				else
+					model.addAttribute("active", false);
+			}
+			model.addAttribute("loggedinuser", getPrincipalName());
+			return "main";
+		}
+	}
 
 	/**
 	 * This method will list all existing users.
 	 */
-	@RequestMapping(value = { "/", "/list" }, method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public String listUsers(ModelMap model) {
-
 		List<User> users = userService.findAllUsers();
 		model.addAttribute("users", users);
 		if (isCurrentAuthenticationAnonymous())
@@ -83,6 +114,8 @@ public class AppController {
 			model.addAttribute("loggedinuser", getPrincipalName());
 		return "userslist";
 	}
+
+
 
 
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)

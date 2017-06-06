@@ -11,12 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import org.springframework.transaction.annotation.Transactional;
 import xyz.redworkout.model.Course;
 import xyz.redworkout.model.User;
 
 
 
 @Repository("userDao")
+@Transactional
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
@@ -26,11 +28,7 @@ public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 		if(user!=null){
 			Hibernate.initialize(user.getUserProfiles());
 			Hibernate.initialize(user.getCourseInfoList());
-			Set<Course> courses = user.getCourseList();
-			Hibernate.initialize(courses);
-			for (Course course : courses) {
-				Hibernate.initialize(course);
-			}
+			Hibernate.initialize(user.getCourseList());
 			Hibernate.initialize(user.getExerciseInfoList());
 		}
 		return user;

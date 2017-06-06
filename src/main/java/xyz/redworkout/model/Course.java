@@ -25,11 +25,11 @@ public class Course implements Serializable {
     @Column(name = "trainings_done")
     private Integer trainingsDone;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "course_id")
     private CourseInfo courseInfo;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private User user;
 
     @OneToMany(fetch = FetchType.LAZY)
