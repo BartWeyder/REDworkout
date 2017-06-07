@@ -28,7 +28,7 @@
                         <h3>${courseName}</h3>
                         <p>${courseDescription}</p>
                         <p>Trainings done: ${trainingsDone} of ${trainingsAmount}</p>
-                        <a class="btn btn-danger" href="<c:url value="/active-course" />">Go to active course</a>
+                        <a class="btn btn-danger" href="<c:url value="/activecourse" />">Go to active course</a>
                     </div>
                 </div>
             </c:when>
@@ -39,7 +39,7 @@
             </div>
             <div class="panel-body">
                 Every day thousands of trainers adds their courses.
-                <a class="btn btn-danger" href="<c:url value="/courses" /> ">Check it</a>
+                <a class="btn btn-danger" href="<c:url value="/allcourses" /> ">Check it</a>
             </div>
         </div>
 
@@ -49,9 +49,10 @@
             </div>
             <div class="panel-body">
                 It's simple as one-two-tree!
-                <a class="btn btn-danger" href="<c:url value="/add/course" /> ">Create</a>
+                <a class="btn btn-danger" href="<c:url value="/createcourse" /> ">Create</a>
             </div>
         </div>
     </div>
+    <jsp:include page="fragments/footer.jsp" />
 </body>
 </html>

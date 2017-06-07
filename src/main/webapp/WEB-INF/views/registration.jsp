@@ -15,7 +15,7 @@
 <body>
  	<div class="generic-container">
 		<div class="well registration-well lead">User Registration Form</div>
-	 	<form:form method="POST" modelAttribute="user" class="form-horizontal">
+	 	<form:form method="POST" modelAttribute="user" class="form-horizontal" action="main.jsp">
 			<form:input type="hidden" path="id" id="id"/>
 			
 			<div class="row">
@@ -97,7 +97,7 @@
 				<div class="form-group col-md-12">
 					<label class="col-md-3 control-lable" for="userProfiles">Height</label>
 					<div class="col-md-7">
-						<form:input type="text" path="height" id="weight" class="form-control input-sm" />
+						<form:input type="text" path="height" id="height" class="form-control input-sm" />
 						<div class="has-error">
 							<form:errors path="height" class="help-inline" />
 						</div>
