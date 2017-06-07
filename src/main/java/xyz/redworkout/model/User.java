@@ -1,13 +1,13 @@
 package xyz.redworkout.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.persistence.*;
 
+import org.hibernate.FetchMode;
+import org.hibernate.Hibernate;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
@@ -43,19 +43,17 @@ public class User implements Serializable{
 	@JoinTable(name = "APP_USER_USER_PROFILE", 
              joinColumns = { @JoinColumn(name = "USER_ID") }, 
              inverseJoinColumns = { @JoinColumn(name = "USER_PROFILE_ID") })
-	private Set<UserProfile> userProfiles = new HashSet<UserProfile>();
+	private List<UserProfile> userProfiles = new ArrayList<>();
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
-	private Set<Course> courseList = new HashSet<>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	private List<Course> courseList;
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
-	private Set<CourseInfo> courseInfoList = new HashSet<>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
+	private List<CourseInfo> courseInfoList = new ArrayList<>();
 
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id")
-	private Set<ExerciseInfo> exerciseInfoList = new HashSet<>();
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "author")
+	@Fetch(org.hibernate.annotations.FetchMode.SELECT)
+	private List<ExerciseInfo> exerciseInfoList = new ArrayList<>();
 
 
 
@@ -115,35 +113,35 @@ public class User implements Serializable{
 		this.height = height;
 	}
 
-	public Set<UserProfile> getUserProfiles() {
+	public List<UserProfile> getUserProfiles() {
 		return userProfiles;
 	}
 
-	public void setUserProfiles(Set<UserProfile> userProfiles) {
+	public void setUserProfiles(List<UserProfile> userProfiles) {
 		this.userProfiles = userProfiles;
 	}
 
-	public Set<Course> getCourseList() {
+	public List<Course> getCourseList() {
 		return courseList;
 	}
 
-	public void setCourseList(Set<Course> courseList) {
+	public void setCourseList(List<Course> courseList) {
 		this.courseList = courseList;
 	}
 
-	public Set<CourseInfo> getCourseInfoList() {
+	public List<CourseInfo> getCourseInfoList() {
 		return courseInfoList;
 	}
 
-	public void setCourseInfoList(Set<CourseInfo> courseInfoList) {
+	public void setCourseInfoList(List<CourseInfo> courseInfoList) {
 		this.courseInfoList = courseInfoList;
 	}
 
-	public Set<ExerciseInfo> getExerciseInfoList() {
+	public List<ExerciseInfo> getExerciseInfoList() {
 		return exerciseInfoList;
 	}
 
-	public void setExerciseInfoList(Set<ExerciseInfo> exerciseInfoList) {
+	public void setExerciseInfoList(List<ExerciseInfo> exerciseInfoList) {
 		this.exerciseInfoList = exerciseInfoList;
 	}
 

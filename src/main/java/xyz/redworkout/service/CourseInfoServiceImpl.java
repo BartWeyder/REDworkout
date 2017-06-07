@@ -6,6 +6,8 @@ import xyz.redworkout.dao.CourseInfoDao;
 import xyz.redworkout.model.CourseInfo;
 
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -52,5 +54,16 @@ public class CourseInfoServiceImpl implements CourseInfoService {
     @Override
     public List<CourseInfo> findAllCourseInfos() {
         return dao.findAll();
+    }
+
+    @Override
+    public List<CourseInfo> findAllPublicCourseInfos() {
+        List<CourseInfo> courses = findAllCourseInfos();
+        List<CourseInfo> publicCourses = new ArrayList<>();
+        for (CourseInfo course : courses) {
+            if (course.isPublicAccess())
+                publicCourses.add(course);
+        }
+        return publicCourses;
     }
 }

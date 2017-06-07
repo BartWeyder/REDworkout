@@ -14,4 +14,5 @@ public interface CourseInfoService  {
     void deleteCourseInfoById(Integer id);
     void updateCourseInfo(CourseInfo courseInfo);
     List<CourseInfo> findAllCourseInfos();
+    List<CourseInfo> findAllPublicCourseInfos();
 }

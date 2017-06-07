@@ -2,6 +2,7 @@ package xyz.redworkout.service;
 
 import java.util.List;
 
+import xyz.redworkout.model.Course;
 import xyz.redworkout.model.User;
 
 
@@ -20,5 +21,7 @@ public interface UserService {
 	List<User> findAllUsers();
 
 	boolean isUserEmailUnique(Integer id, String email);
+
+	Course findActiveCourse (User user);
 
 }

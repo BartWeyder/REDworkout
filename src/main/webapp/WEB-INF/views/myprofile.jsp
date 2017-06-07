@@ -17,9 +17,9 @@
 <div class="container">
       <div class="row">
       <div class="col-md-5  toppad  pull-right col-md-offset-3 ">
-           <A href="#" >Edit Profile</A> |
+           <A href="<c:url value="/editprofile" /> " >Edit Profile</A> |
 
-        <A href="#" >Logout</A>
+        <A href="<c:url value="/login?logout" /> " >Logout</A>
        <br>
 
       </div>
@@ -28,7 +28,7 @@
    
           <div class="panel panel-danger panel-info">
             <div class="panel-heading">
-              <h3 class="panel-title">Name Surname</h3>
+              <h3 class="panel-title">${user.firstName} ${user.lastName}</h3>
             </div>
             <div class="panel-body">
               <div class="row">
@@ -40,31 +40,26 @@
                     <tbody>
                       <tr>
                         <td>Email:</td>
-                        <td><a href="mailto:info@support.com">info@support.com</a></td>
+                        <td><a href="${user.email}">${user.email}</a></td>
                       </tr>
-                      
+
                       <tr>
-                        <td>Date of Birth:</td>
-                        <td>01.01.1988</td>
-                      </tr>                      
-          
-                       
-                     <tr>
-                        <td>Gender:</td>
-                        <td>Male</td>
+                        <td>My current weight:</td>
+                        <td>${user.weight}</td>
                       </tr>
-                       
 
 
-                        <td>Phone Number</td>
-                        <td>+380998765432
-                        </td>
-                           
+                     <tr>
+                        <td>My height:</td>
+                        <td>${user.height}</td>
+                      </tr>
+
+
 
                     </tbody>
                   </table>
                   
-                  <a href="#" class="btn  btn-danger">All my courses</a>
+                  <a href="<c:url value="/mycourses"/> " class="btn  btn-danger">All my courses</a>
 
                 </div>
               </div>

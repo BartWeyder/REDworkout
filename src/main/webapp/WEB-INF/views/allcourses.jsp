@@ -26,44 +26,44 @@
      </div>
      
      <div class="row" >
-         <div  class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-            <div class="thumbnail">
-             <img src="<c:url value='/static/img/thumbnail.png' alt="Course pic"/>"	
-             <div class="caption">
-                 <h4>Course name1</h4>
-                 <p>Course name1 description</p>
-                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Read more</button>
-                 
-                 
-                  <!-- Modal -->
-                          <div class="modal fade" id="myModal" role="dialog">
-                            <div class="modal-dialog">
+         <c:forEach items="${courses}" var="course" >
+             <div  class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                <div class="thumbnail">
+                 <img src="<c:url value='/static/img/thumbnail.png'/>" alt="Course pic" />
+                 <div class="caption">
+                     <h4>${course.courseName}</h4>
+                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Read more</button>
 
-                              <!-- Modal content-->
-                              <div class="modal-content">
-                                <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                  <h4 class="modal-title">Course name1</h4>
-                                </div>
-                                <div class="modal-body">
-                                <b>Duration of the course:</b> <span></span> 
-                            <br><b> Count of trainings per week:</b> <span></span>
-                            <br><b> Price for the whole course: </b> <span></span>
- 
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="button" class="btn btn-inverse" data-dismiss="modal">Close</button>
+
+                      <!-- Modal -->
+                              <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
+
+                                  <!-- Modal content-->
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                      <h4 class="modal-title">${course.courseDescription}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <b>Duration of the course:</b> <span>${course.duration} weeks</span>
+                                        <p><b>Description:</b> ${course.courseDescription}</p>
+                                        <br><b> Trainings per week:</b> <span>${course.trainingsPerWeek}</span>
+                                        <br><b> Price for the whole course: </b> <span>${course.price} $</span>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="<c:url value="/start/course/${course.id}" /> " class="btn btn-primary">Start</a>
+                                        <button type="button" class="btn btn-inverse" data-dismiss="modal">Close</button>
+                                    </div>
+                                  </div>
+
                                 </div>
                               </div>
-
-                            </div>
-                          </div>
-                 
-                 
+                 </div>
+                </div>
              </div>
-            </div>
-         </div>
-         
+         </c:forEach>
 
      </div> 
  </div>

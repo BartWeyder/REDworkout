@@ -18,17 +18,19 @@ import xyz.redworkout.model.User;
 
 
 @Repository("userDao")
-@Transactional
 public class UserDaoImpl extends AbstractDao<Integer, User> implements UserDao {
 
 	static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
-	
+
+
 	public User findById(int id) {
 		User user = getByKey(id);
 		if(user!=null){
+
+			Hibernate.initialize(user.getCourseList());
 			Hibernate.initialize(user.getUserProfiles());
 			Hibernate.initialize(user.getCourseInfoList());
-			Hibernate.initialize(user.getCourseList());
+
 			Hibernate.initialize(user.getExerciseInfoList());
 		}
 		return user;

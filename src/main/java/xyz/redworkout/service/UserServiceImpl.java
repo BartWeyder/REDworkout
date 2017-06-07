@@ -1,6 +1,7 @@
 package xyz.redworkout.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -8,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import xyz.redworkout.dao.UserDao;
+import xyz.redworkout.model.Course;
+import xyz.redworkout.model.CourseInfo;
 import xyz.redworkout.model.User;
 
 
@@ -72,4 +75,17 @@ public class UserServiceImpl implements UserService{
 		User user = findByEmail(email);
 		return (user == null || ((id != null) && (user.getId() == id)));
 	}
+
+	@Override
+	public Course findActiveCourse(User user) {
+		List<Course> courses = user.getCourseList();
+
+		for (Course course : courses) {
+			if (course.isActive())
+				return course;
+		}
+
+		return null;
+	}
 }
+

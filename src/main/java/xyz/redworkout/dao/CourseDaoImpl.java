@@ -1,7 +1,6 @@
 package xyz.redworkout.dao;
 
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
+import org.hibernate.*;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -14,17 +13,22 @@ import java.util.List;
  * Created by Eugenij Kizim on 06-Jun-17.
  */
 @Repository("courseDao")
-@Transactional
 public class CourseDaoImpl extends AbstractDao<Integer, Course> implements CourseDao{
     @Override
     public Course findById(Integer id) {
+        getSession().flush();
+
         Course course = getByKey(id);
+
         if (course != null) {
             Hibernate.initialize(course.getUser());
             Hibernate.initialize(course.getCourseInfo());
             Hibernate.initialize(course.getTrainings());
             //TODO: add more initialize if needed
         }
+
+        getSession().clear();
+
         return course;
     }
 

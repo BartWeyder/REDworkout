@@ -22,10 +22,10 @@ public class Exercise implements Serializable {
     private ExerciseInfo exerciseInfo;
 
     @ManyToOne (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "training_id")
     private Training training;
 
-    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
+    @OneToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "exercise")
     private List<ExerciseSet> sets = new ArrayList<>();
 
     public Integer getId() {
