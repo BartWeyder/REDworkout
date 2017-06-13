@@ -21,7 +21,7 @@
 				<div class="login-card">
 					<div class="login-form">
 						<c:url var="loginUrl" value="/login" />
-						<form action="${loginUrl}" method="post" class="form-horizontal">
+						<form action="${loginUrl}" method="post" class="form-horizontal" action="<c:url value="/main" />">
 							<c:if test="${param.error != null}">
 								<div class="alert alert-danger">
 									<p>Invalid username and password.</p>
@@ -54,7 +54,7 @@
 						</form>
 					</div>
 				</div>
-                <p class="linksignup">Don't have an account? <a href="<c:url value="/signup" /> " style="color:blue">Sign up</a> for free</p>
+                <p class="linksignup">Don't have an account? <a href="<c:url value="/registration" /> " style="color:blue">Sign up</a> for free</p>
 			</div>
 		</div>
 
